@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - DeLorean Time Circuits</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Delorean Time Circuits -->
+<!-- PUG reduces the HTML code more than 80% -->
+<!-- from 1400 to 280 lines-->
+<div class="mod-info">
+  <div class="dragmove">
+    <div>DRAG AND DROP</div>spin scene
+  </div>
+  <div class="zoomwheel"> 
+    <div>MOUSE WHEEL</div>zoom scene
+  </div>
+  <div class="arrowsmove"> 
+    <div>KEYBOARD ARROWS</div>center scene
+  </div>
+  <div class="escapekey"> 
+    <div>ESC KEY</div>reset scene position
+  </div>
+  <div class="keyboardnum">
+    <div>KEYBOARD NUMBERS</div>input time
+  </div>
+  <div class="inputformat">
+    <div>INPUT FORMAT</div>mmddyyyy hhmm
+  </div>
+  <button class="menu-icon" id="menu-help"></button>
+</div>
+<div class="mod-options">
+  <button class="menu-icon" id="menu-opt"></button>
+  <div class="btn-options">
+    <button class="active" id="hs-gauges" onclick="hsModule(id);"></button>
+    <button id="ly-gauges" onclick="lyModule(id);"></button>
+  </div>
+  <div class="btn-options">
+    <button class="active" id="hs-panel" onclick="hsModule(id);"></button>
+    <button id="ly-panel" onclick="lyModule(id);"></button>
+  </div>
+  <div class="btn-options">
+    <button class="active" id="hs-keyboard" onclick="hsModule(id);"></button>
+    <button id="ly-keyboard" onclick="lyModule(id);"></button>
+  </div>
+  <div class="btn-options">
+    <button class="active" id="hs-onoff" onclick="hsModule(id);"></button>
+    <button id="ly-onoff" onclick="lyModule(id);"></button>
+  </div>
+</div>
+<div class="error" id="error">* INPUT <br> * TIME</div>
+<div class="scene">
+  <section data-camera="data-camera">
+    <section data-scene="data-scene">
+      <div class="content">
+        <div class="group">
+          <!-- panels-->
+          <div class="cuboid panel destination">
+            <div class="side clock"><span class="month" id="d-month">JUN</span><span class="day" id="d-day">19</span><span class="year" id="d-year">2012</span><span class="ampm"><em class="am off" id="am-des"></em><em class="pm" id="pm-des"></em></span><span class="hour" id="d-hour">05</span><span class="dots"></span><span class="minute" id="d-minute">06</span></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+          </div>
+          <div class="cuboid panel present">
+            <div class="side clock"><span class="month" id="p-month">NOV</span><span class="day" id="p-day">05</span><span class="year" id="p-year">1955</span><span class="ampm"><em class="am" id="am-pre"></em><em class="pm" id="pm-pre"></em></span><span class="hour" id="p-hour">01</span><span class="dots"></span><span class="minute" id="p-minute">22</span></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+          </div>
+          <div class="cuboid panel departed">
+            <div class="side clock"><span class="month">NOV</span><span class="day">22</span><span class="year">2021</span><span class="ampm"><em class="am"></em><em class="pm off"></em></span><span class="hour">11</span><span class="dots"></span><span class="minute">43</span></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+            <div class="side"></div>
+          </div>
+          <!-- cover-->
+          <div class="cuboid cover top"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+          <div class="cuboid cover right"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+          <div class="cuboid cover left"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+          <div class="cover screws">
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <!--keypad-->
+          <div class="cuboid keyboard"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div>
+            <div class="ligths">
+              <div class="cuboid light red"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid light yellow"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid light green"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid light btn" onclick="inpDesTime();" onmousedown="playAudio(&quot;https://josetxu.com/demos/audio/bttf-input-button.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid light white"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            </div>
+            <div class="numbers">
+              <div class="cuboid number one" onclick="setDesTime(&quot;1&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-1.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number two" onclick="setDesTime(&quot;2&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-2.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number three" onclick="setDesTime(&quot;3&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-3.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number four" onclick="setDesTime(&quot;4&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-1.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number five" onclick="setDesTime(&quot;5&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-2.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number six" onclick="setDesTime(&quot;6&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-3.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number seven" onclick="setDesTime(&quot;7&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-1.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number eight" onclick="setDesTime(&quot;8&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-2.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number nine" onclick="setDesTime(&quot;9&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-3.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid number zero" onclick="setDesTime(&quot;0&quot;); playIfPowerOn(&quot;https://josetxu.com/demos/audio/bttf-dial-2.mp3&quot;)"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            </div>
+          </div>
+          <!--gauges-->
+          <div class="cuboid gauges"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div>
+            <div class="cylinder gauges-top"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="indicator primary rounded"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <div class="ring"></div>
+              <div class="scale"></div>
+              <div class="screws"><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="indicator percent rounded"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <div class="ring"></div>
+              <div class="scale"></div>
+              <div class="screws"><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <div class="cuboid indicator plutonium rounded"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div>
+              <div class="ring"></div>
+              <div class="red-light"></div>
+              <div class="screws"><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+          <!--tfc-->
+          <div class="cuboid onoff">
+            <div class="side">
+            </div>
+            <div class="side">
+            </div>
+            <div class="side">
+            </div>
+            <div class="side">
+            </div>
+            <div class="side">
+              <div class="screws">
+                <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="screws">
+                <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="screws">
+                <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <div class="screw"><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="side">
+            </div>
+            <div class="cuboid glass">
+              <div class="side"></div>
+              <div class="side"></div>
+              <div class="side"></div>
+              <div class="side"></div>
+              <div class="side"></div>
+              <div class="side"></div>
+              <div class="side"></div>
+              <div class="side"></div>
+            </div>
+            <div class="cylinder btn-wheel"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder btn-axis"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <!--knob-->
+            <div class="knob">
+              <div class="cylinder knob-base"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-base2"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-tube"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-junction"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-left"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-right"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-ring"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-ring"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-ring"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder knob-ring"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cuboid inner-contact"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid inner-contact"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cuboid inner-contact"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+              <div class="cylinder axis-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            </div>
+            <div class="cylinder inner-tube-top"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder inner-tube-bot"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cuboid inner-base"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            <div class="cuboid inner-pole"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            <div class="cuboid inner-pole"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            <div class="cuboid inner-pole"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            <div class="cuboid inner-pole"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            <div class="cuboid inner-pole"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            <div class="cuboid inner-pole"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+            <div class="cylinder inner-screwed"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder inner-screwed"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder inner-screwed"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder inner-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder inner-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder inner-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="inner-washer"></div>
+            <div class="inner-washer"></div>
+            <div class="inner-washer"></div>
+            <div class="inner-washer"></div>
+            <div class="inner-washer"></div>
+            <div class="inner-washer"></div>
+            <div class="cylinder cable"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder cable corner"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder cable sheath"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder cable p-right"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder cable p-right corner"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder cable p-right sheath"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder ground-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder ground-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder ground-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <div class="cylinder ground-nut"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+            <!--onoff btns-->
+            <div class="onoff-btns">
+              <div class="off-btn" id="turn-off">
+                <div class="cuboid hexagon"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cuboid hexagon"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cuboid hexagon"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div class="on-btn" id="turn-on">
+                <div class="cuboid hexagon"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cuboid hexagon"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cuboid hexagon"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+            <!--reset btn-->
+            <div class="reset" id="reset"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><em></em><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="reset base"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <!--switches-->
+            <div class="switches">
+              <div class="cylinder switch-base"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-actuator" id="a01"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-base sw2"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-actuator sw2" id="a02"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-base sw3"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-actuator sw3" id="a03"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-base sw-small"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-actuator sw-small" id="a04"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-base sw-small sw5"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-actuator sw-small sw5" id="a05"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-base sw-small sw6"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-actuator sw-small sw6" id="a06"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-base sw-green"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="cylinder switch-actuator sw-green" id="a07"><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div></div>
+              <div class="switch-cover">
+                <div class="cuboid sw-cover"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cuboid sw-cover sw-top"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cuboid sw-cover sw-left"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cuboid sw-cover sw-right"><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div></div>
+                <div class="cylinder switch-cover-bar"></div>
+                <div class="cylinder switch-cover-bis"></div>
+              </div>
+              <!--audio -->
+              <audio id="as1" src="https://josetxu.com/demos/audio/bttf-01.mp3"></audio>
+              <audio id="as2" src="https://josetxu.com/demos/audio/bttf-02.mp3"></audio>
+              <audio id="as3" src="https://josetxu.com/demos/audio/bttf-03.mp3"></audio>
+              <audio id="as4" src="https://josetxu.com/demos/audio/bttf-04.mp3"></audio>
+              <audio id="as5" src="https://josetxu.com/demos/audio/bttf-05.mp3"></audio>
+              <audio id="as6" src="https://josetxu.com/demos/audio/bttf-06.mp3"></audio>
+              <audio id="as7" src="https://josetxu.com/demos/audio/bttf-07.mp3"></audio>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</div>
+<!-- partial -->
+  <script src='https://josetxu.com/demos/js/camera.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

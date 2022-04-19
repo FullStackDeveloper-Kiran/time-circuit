@@ -1,0 +1,282 @@
+// Delorean Time Circuits 
+// PUG reduces the HTML code more than 80% 
+// from 1400 to 280 lines
+.mod-info
+	.dragmove
+		div DRAG AND DROP
+		| spin scene
+	.zoomwheel 
+		div MOUSE WHEEL
+		| zoom scene
+	.arrowsmove 
+		div KEYBOARD ARROWS
+		| center scene
+	.escapekey 
+		div ESC KEY
+		| reset scene position
+	.keyboardnum
+		div KEYBOARD NUMBERS
+		| input time
+	.inputformat
+		div INPUT FORMAT
+		| mmddyyyy hhmm
+	button#menu-help.menu-icon
+
+.mod-options
+	button#menu-opt.menu-icon
+	.btn-options
+		button#hs-gauges.active(onclick="hsModule(id);")
+		button#ly-gauges(onclick="lyModule(id);")
+	.btn-options
+		button#hs-panel.active(onclick="hsModule(id);")
+		button#ly-panel(onclick="lyModule(id);")
+	.btn-options
+		button#hs-keyboard.active(onclick="hsModule(id);")
+		button#ly-keyboard(onclick="lyModule(id);")
+	.btn-options
+		button#hs-onoff.active(onclick="hsModule(id);")
+		button#ly-onoff(onclick="lyModule(id);")
+
+#error.error * INPUT <br> * TIME
+
+- let sides = '<div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div><div class="side"></div>';
+- let faces = '<div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div>';
+
+.scene
+	section(data-camera="data-camera")
+		section(data-scene="data-scene")
+			.content
+				.group
+					// panels
+					.cuboid.panel.destination
+						.side.clock
+							span#d-month.month JUN
+							span#d-day.day 19
+							span#d-year.year 2012
+							span.ampm
+								em#am-des.am.off
+								em#pm-des.pm
+							span#d-hour.hour 05
+							span.dots
+							span#d-minute.minute 06
+						- for (var s=0; s<5; s++)
+							.side
+					.cuboid.panel.present
+						.side.clock
+							span#p-month.month NOV
+							span#p-day.day 05
+							span#p-year.year 1955
+							span.ampm
+								em#am-pre.am
+								em#pm-pre.pm
+							span#p-hour.hour 01
+							span.dots
+							span#p-minute.minute 22
+						- for (var s=0; s<5; s++)
+							.side
+					.cuboid.panel.departed
+						.side.clock
+							span.month NOV
+							span.day 22
+							span.year 2021
+							span.ampm
+								em.am
+								em.pm.off
+							span.hour 11
+							span.dots
+							span.minute 43
+						- for (var s=0; s<5; s++)
+							.side
+					// cover
+					.cuboid.cover.top !{sides}
+					.cuboid.cover.right !{sides}
+					.cuboid.cover.left !{sides}
+					.cover.screws
+						- for (var sc=0; sc<12; sc++)
+							.screw
+								- for (var sp=0; sp<5; sp++)
+									span
+
+					//keypad
+					.cuboid.keyboard !{sides}
+						.ligths
+							.cuboid.light.red !{sides}
+							.cuboid.light.yellow !{sides}
+							.cuboid.light.green !{sides}
+							.cuboid.light.btn(
+								onclick="inpDesTime();",
+								onmousedown="playAudio(\"https://josetxu.com/demos/audio/bttf-input-button.mp3\")"
+							) !{sides}
+							.cuboid.light.white !{sides}
+						.numbers
+							.cuboid.number.one(
+								onclick="setDesTime(\"1\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-1.mp3\")"
+							) !{sides}
+							.cuboid.number.two(
+								onclick="setDesTime(\"2\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-2.mp3\")"
+							) !{sides}
+							.cuboid.number.three(
+								onclick="setDesTime(\"3\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-3.mp3\")"
+							) !{sides}
+							.cuboid.number.four(
+								onclick="setDesTime(\"4\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-1.mp3\")"
+							) !{sides}
+							.cuboid.number.five(
+								onclick="setDesTime(\"5\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-2.mp3\")"
+							) !{sides}
+							.cuboid.number.six(
+								onclick="setDesTime(\"6\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-3.mp3\")"
+							) !{sides}
+							.cuboid.number.seven(
+								onclick="setDesTime(\"7\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-1.mp3\")"
+							) !{sides}
+							.cuboid.number.eight(
+								onclick="setDesTime(\"8\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-2.mp3\")"
+							) !{sides}
+							.cuboid.number.nine(
+								onclick="setDesTime(\"9\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-3.mp3\")"
+							) !{sides}
+							.cuboid.number.zero(
+								onclick="setDesTime(\"0\"); playIfPowerOn(\"https://josetxu.com/demos/audio/bttf-dial-2.mp3\")"
+							) !{sides}
+
+					//gauges
+					.cuboid.gauges !{sides}
+						.cylinder.gauges-top !{faces}
+						.indicator.primary.rounded
+							- for (var sp=0; sp<10; sp++)
+								span
+							.ring
+							.scale
+							.screws
+								- for (var sp=0; sp<5; sp++)
+									span
+						.indicator.percent.rounded
+							- for (var sp=0; sp<10; sp++)
+								span
+							.ring
+							.scale
+							.screws
+								- for (var sp=0; sp<5; sp++)
+									span
+						.cuboid.indicator.plutonium.rounded !{sides}
+							.ring
+							.red-light
+							.screws
+								- for (var sp=0; sp<3; sp++)
+									span
+
+					//tfc
+					.cuboid.onoff
+						- for (var s=0; s<6; s++)
+							.side
+								if (s == 4)
+									- for (var scs=0; scs<3; scs++)
+										.screws
+											- for (var sc=0; sc<2; sc++)
+												.screw
+													- for (var sp=0; sp<5; sp++)
+														span
+						.cuboid.glass
+							- for (var s=0; s<8; s++)
+								.side
+						.cylinder.btn-wheel !{faces}
+						.cylinder.btn-axis !{faces}
+
+						//knob
+						.knob
+							.cylinder.knob-base !{faces}
+							.cylinder.knob-base2 !{faces}
+							.cylinder.knob-tube !{faces}
+							.cylinder.knob-junction !{faces}
+							.cylinder.knob-left !{faces}
+							.cylinder.knob-right !{faces}
+							- for (var r=0; r<4; r++)
+								.cylinder.knob-ring !{faces}
+							- for (var ic=0; ic<3; ic++)
+								.cuboid.inner-contact !{sides}
+							.cylinder.axis-nut !{faces}
+
+						.cylinder.inner-tube-top !{faces}
+						.cylinder.inner-tube-bot !{faces}
+						.cuboid.inner-base !{sides}
+						- for (var ip=0; ip<6; ip++)
+							.cuboid.inner-pole !{sides}
+						- for (var is=0; is<3; is++)
+							.cylinder.inner-screwed !{faces}
+						- for (var it=0; it<3; it++)
+							.cylinder.inner-nut !{faces}
+						- for (var iw=0; iw<6; iw++)
+							.inner-washer
+
+						.cylinder.cable !{faces}
+						.cylinder.cable.corner !{faces}
+						.cylinder.cable.sheath !{faces}
+						.cylinder.cable.p-right !{faces}
+						.cylinder.cable.p-right.corner !{faces}
+						.cylinder.cable.p-right.sheath !{faces}
+						- for (var gn=0; gn<4; gn++)
+							.cylinder.ground-nut !{faces}
+
+						//onoff btns
+						.onoff-btns
+							#turn-off.off-btn
+								- for (var ch=0; ch<3; ch++)
+									.cuboid.hexagon !{sides}
+								- for (var em=0; em<10; em++)
+									em
+								- for (var i=0; i<10; i++)
+									i
+							#turn-on.on-btn
+								- for (var ch=0; ch<3; ch++)
+									.cuboid.hexagon !{sides}
+								- for (var em=0; em<10; em++)
+									em
+								- for (var i=0; i<10; i++)
+									i
+
+						//reset btn
+						#reset.reset
+							- for (var sp=0; sp<10; sp++)
+								span
+							- for (var em=0; em<10; em++)
+								em
+							- for (var i=0; i<10; i++)
+								i
+						.reset.base
+							- for (var sp=0; sp<10; sp++)
+								span
+
+						//switches
+						.switches
+							.cylinder.switch-base !{faces}
+							#a01.cylinder.switch-actuator !{faces}
+							.cylinder.switch-base.sw2 !{faces}
+							#a02.cylinder.switch-actuator.sw2 !{faces}
+							.cylinder.switch-base.sw3 !{faces}
+							#a03.cylinder.switch-actuator.sw3 !{faces}
+							.cylinder.switch-base.sw-small !{faces}
+							#a04.cylinder.switch-actuator.sw-small !{faces}
+							.cylinder.switch-base.sw-small.sw5 !{faces}
+							#a05.cylinder.switch-actuator.sw-small.sw5 !{faces}
+							.cylinder.switch-base.sw-small.sw6 !{faces}
+							#a06.cylinder.switch-actuator.sw-small.sw6 !{faces}
+							.cylinder.switch-base.sw-green !{faces}
+							#a07.cylinder.switch-actuator.sw-green !{faces}
+
+							.switch-cover
+								.cuboid.sw-cover !{sides}
+								.cuboid.sw-cover.sw-top !{sides}
+								.cuboid.sw-cover.sw-left !{sides}
+								.cuboid.sw-cover.sw-right !{sides}
+								.cylinder.switch-cover-bar
+								.cylinder.switch-cover-bis
+
+							//audio 
+							audio#as1(src="https://josetxu.com/demos/audio/bttf-01.mp3")
+							audio#as2(src="https://josetxu.com/demos/audio/bttf-02.mp3")
+							audio#as3(src="https://josetxu.com/demos/audio/bttf-03.mp3")
+							audio#as4(src="https://josetxu.com/demos/audio/bttf-04.mp3")
+							audio#as5(src="https://josetxu.com/demos/audio/bttf-05.mp3")
+							audio#as6(src="https://josetxu.com/demos/audio/bttf-06.mp3")
+							audio#as7(src="https://josetxu.com/demos/audio/bttf-07.mp3")
